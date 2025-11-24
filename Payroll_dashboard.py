@@ -442,7 +442,7 @@ if not df.empty:
                     yaxis_tickprefix="$",
                     showlegend=False
                 )
-                st.plotly_chart(fig_dept, use_container_width=True)
+                st.plotly_chart(fig_dept, use_container_width=True, key="dept_salary_overview")
 
         with chart_col2:
             if "Hiring Category" in filtered_df.columns:
@@ -456,7 +456,7 @@ if not df.empty:
                     hole=0.4,
                     color_discrete_sequence=px.colors.sequential.Reds_r
                 )
-                st.plotly_chart(fig_cat, use_container_width=True)
+                st.plotly_chart(fig_cat, use_container_width=True, key="hiring_category_overview")
 
         st.markdown("---")
 
@@ -477,7 +477,7 @@ if not df.empty:
                     xaxis_tickprefix="$",
                     yaxis_title="Number of Employees"
                 )
-                st.plotly_chart(fig_hist, use_container_width=True)
+                st.plotly_chart(fig_hist, use_container_width=True, key="salary_distribution_overview")
 
         with chart_col4:
             if "Position" in filtered_df.columns:
@@ -560,7 +560,7 @@ if not df.empty:
                         color_discrete_sequence=px.colors.sequential.Reds_r
                     )
                     fig_comp.update_layout(xaxis_title="", yaxis_tickprefix="$")
-                    st.plotly_chart(fig_comp, use_container_width=True)
+                    st.plotly_chart(fig_comp, use_container_width=True, key="comp_breakdown_dept_analysis")
 
             with viz_col2:
                 # Headcount by department
@@ -581,7 +581,7 @@ if not df.empty:
                     color_continuous_scale="Reds"
                 )
                 fig_dept_hc.update_layout(xaxis_title="", showlegend=False)
-                st.plotly_chart(fig_dept_hc, use_container_width=True)
+                st.plotly_chart(fig_dept_hc, use_container_width=True, key="headcount_dept_analysis")
 
             # Salary box plot by department
             if "Annual Salary" in filtered_df.columns:
@@ -595,7 +595,7 @@ if not df.empty:
                     color_discrete_sequence=["#dc2626"]
                 )
                 fig_box.update_layout(yaxis_tickprefix="$")
-                st.plotly_chart(fig_box, use_container_width=True)
+                st.plotly_chart(fig_box, use_container_width=True, key="salary_box_dept_analysis")
 
     # -------------------------
     # TAB 3: COMPENSATION DETAILS
@@ -648,7 +648,7 @@ if not df.empty:
                         color_discrete_sequence=px.colors.sequential.Reds_r
                     )
                     fig_scatter.update_layout(yaxis_tickprefix="$")
-                    st.plotly_chart(fig_scatter, use_container_width=True)
+                    st.plotly_chart(fig_scatter, use_container_width=True, key="hourly_scatter_comp_details")
 
         st.markdown("---")
 
@@ -749,7 +749,7 @@ if not df.empty:
                                     color_continuous_scale="Reds"
                                 )
                                 fig_pos.update_layout(showlegend=False, xaxis_title="")
-                                st.plotly_chart(fig_pos, use_container_width=True)
+                                st.plotly_chart(fig_pos, use_container_width=True, key=f"pos_chart_{dept}_{idx}")
 
                         with viz_col2:
                             # Salary distribution
@@ -765,7 +765,8 @@ if not df.empty:
                                     xaxis_tickprefix="$",
                                     yaxis_title="Count"
                                 )
-                                st.plotly_chart(fig_salary_dist, use_container_width=True)
+                                st.plotly_chart(fig_salary_dist, use_container_width=True,
+                                                key=f"salary_dist_{dept}_{idx}")
 
                         # Hiring category breakdown
                         if "Hiring Category" in dept_data.columns:
@@ -781,7 +782,7 @@ if not df.empty:
                                 hole=0.3,
                                 color_discrete_sequence=px.colors.sequential.Reds_r
                             )
-                            st.plotly_chart(fig_cat, use_container_width=True)
+                            st.plotly_chart(fig_cat, use_container_width=True, key=f"cat_chart_{dept}_{idx}")
 
                         st.markdown("---")
 
@@ -892,7 +893,7 @@ if not df.empty:
                             hole=0.4,
                             color_discrete_sequence=px.colors.sequential.Reds_r
                         )
-                        st.plotly_chart(fig_emp_comp, use_container_width=True)
+                        st.plotly_chart(fig_emp_comp, use_container_width=True, key=f"emp_comp_{selected_employee}")
 
                     st.markdown("---")
 
@@ -925,7 +926,8 @@ if not df.empty:
                                 )
                                 fig_dept_comp.update_traces(texttemplate='$%{text:,.0f}', textposition='outside')
                                 fig_dept_comp.update_layout(yaxis_tickprefix="$", showlegend=False)
-                                st.plotly_chart(fig_dept_comp, use_container_width=True)
+                                st.plotly_chart(fig_dept_comp, use_container_width=True,
+                                                key=f"dept_comp_{selected_employee}")
 
                         with comp_col2:
                             # Compare with company
@@ -948,7 +950,8 @@ if not df.empty:
                             )
                             fig_company_comp.update_traces(texttemplate='$%{text:,.0f}', textposition='outside')
                             fig_company_comp.update_layout(yaxis_tickprefix="$", showlegend=False)
-                            st.plotly_chart(fig_company_comp, use_container_width=True)
+                            st.plotly_chart(fig_company_comp, use_container_width=True,
+                                            key=f"company_comp_{selected_employee}")
 
                     st.markdown("---")
 
