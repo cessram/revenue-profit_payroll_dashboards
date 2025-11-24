@@ -10,7 +10,7 @@ from io import BytesIO
 # CONFIG
 # -------------------------
 st.set_page_config(
-    page_title="Inland – Salary & Payroll Analytics",
+    page_title="Company – Salary & Payroll Analytics",
     layout="wide",
     initial_sidebar_state="expanded"
 )
