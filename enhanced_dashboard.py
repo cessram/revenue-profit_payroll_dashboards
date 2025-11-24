@@ -19,14 +19,360 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# ============================================================================
+# ENHANCED DARK THEME CSS - Black & Blue Gradient
+# ============================================================================
 st.markdown("""
     <style>
-    .main > div { padding-top: 2rem; }
-    .stMetric { background-color: #f0f2f6; padding: 15px; border-radius: 5px; }
-    .stAlert { margin-top: 1rem; }
+    /* Main app background - Black to Blue gradient */
+    .stApp {
+        background: linear-gradient(135deg, #0a0a0a 0%, #0d1b2a 25%, #1b263b 50%, #0d1b2a 75%, #0a0a0a 100%) !important;
+        background-attachment: fixed;
+    }
+
+    /* Fix white header issue */
+    .stApp > header {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+    header[data-testid="stHeader"] {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+    .stAppHeader, .st-emotion-cache-h4xjwg, .st-emotion-cache-1avcm0n {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+    /* Target all possible header classes */
+    div[data-testid="stHeader"], 
+    section[data-testid="stHeader"],
+    .st-emotion-cache-18ni7ap,
+    .st-emotion-cache-zq5wmm,
+    .st-emotion-cache-1dp5vir {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+    /* Remove any top white bars */
+    .stApp iframe[title="streamlit_marquee"] {
+        display: none;
+    }
+
+    /* Main content area */
+    .main > div {
+        padding-top: 2rem;
+    }
+
+    /* Block container background fix */
+    .block-container {
+        background: transparent !important;
+    }
+
+    .st-emotion-cache-1y4p8pa, .st-emotion-cache-z5fcl4 {
+        background: transparent !important;
+    }
+
+    /* Sidebar styling */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #0d1b2a 0%, #1b263b 50%, #0d1b2a 100%);
+        border-right: 1px solid #1e3a5f;
+    }
+
+    [data-testid="stSidebar"] .stMarkdown {
+        color: #e0e0e0;
+    }
+
+    /* Headers */
+    h1, h2, h3, h4, h5, h6 {
+        color: #4cc9f0 !important;
+        text-shadow: 0 0 10px rgba(76, 201, 240, 0.3);
+    }
+
+    /* Regular text */
+    p, span, label, .stMarkdown {
+        color: #e0e0e0 !important;
+    }
+
+    /* Metric cards */
+    [data-testid="stMetric"] {
+        background: linear-gradient(135deg, #1b263b 0%, #0d1b2a 100%);
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #1e3a5f;
+        box-shadow: 0 4px 15px rgba(0, 100, 200, 0.2);
+    }
+
+    [data-testid="stMetric"] label {
+        color: #4cc9f0 !important;
+    }
+
+    [data-testid="stMetric"] [data-testid="stMetricValue"] {
+        color: #ffffff !important;
+        text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+    }
+
+    [data-testid="stMetric"] [data-testid="stMetricDelta"] {
+        color: #00d4aa !important;
+    }
+
+    /* Buttons */
+    .stButton > button {
+        background: linear-gradient(135deg, #1e3a5f 0%, #3a86ff 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(58, 134, 255, 0.3);
+    }
+
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #3a86ff 0%, #4cc9f0 100%);
+        box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* Select boxes and inputs */
+    .stSelectbox > div > div,
+    .stMultiSelect > div > div,
+    .stTextInput > div > div > input,
+    .stNumberInput > div > div > input {
+        background-color: #1b263b !important;
+        color: #e0e0e0 !important;
+        border: 1px solid #1e3a5f !important;
+        border-radius: 8px;
+    }
+
+    /* Dropdowns */
+    [data-baseweb="select"] {
+        background-color: #1b263b !important;
+    }
+
+    [data-baseweb="popover"] {
+        background-color: #1b263b !important;
+        border: 1px solid #1e3a5f !important;
+    }
+
+    /* Slider */
+    .stSlider > div > div > div {
+        background-color: #3a86ff !important;
+    }
+
+    /* Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        background-color: transparent;
+        gap: 8px;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        background-color: #1b263b;
+        color: #e0e0e0;
+        border-radius: 8px 8px 0 0;
+        border: 1px solid #1e3a5f;
+        padding: 10px 20px;
+    }
+
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #1e3a5f 0%, #3a86ff 100%);
+        color: white;
+    }
+
+    /* Expanders */
+    .streamlit-expanderHeader {
+        background-color: #1b263b !important;
+        color: #4cc9f0 !important;
+        border: 1px solid #1e3a5f !important;
+        border-radius: 8px;
+    }
+
+    .streamlit-expanderContent {
+        background-color: #0d1b2a !important;
+        border: 1px solid #1e3a5f !important;
+    }
+
+    /* Info, Warning, Success, Error boxes */
+    .stAlert {
+        margin-top: 1rem;
+        border-radius: 8px;
+    }
+
+    [data-testid="stAlert"] {
+        background-color: #1b263b;
+        border: 1px solid #1e3a5f;
+    }
+
+    /* Info box - Blue theme */
+    .stAlert[data-baseweb="notification"] {
+        background-color: rgba(58, 134, 255, 0.1) !important;
+        border-left: 4px solid #3a86ff !important;
+    }
+
+    /* Success box */
+    div[data-testid="stAlert"]:has(div[role="alert"]) {
+        background-color: rgba(0, 212, 170, 0.1) !important;
+        border-left: 4px solid #00d4aa !important;
+    }
+
+    /* Dataframe */
+    .stDataFrame {
+        background-color: #1b263b;
+        border-radius: 10px;
+        border: 1px solid #1e3a5f;
+    }
+
+    [data-testid="stDataFrame"] > div {
+        background-color: #0d1b2a !important;
+    }
+
+    /* Download button */
+    .stDownloadButton > button {
+        background: linear-gradient(135deg, #1e3a5f 0%, #3a86ff 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+    }
+
+    /* File uploader */
+    [data-testid="stFileUploader"] {
+        background-color: #1b263b;
+        border: 2px dashed #3a86ff;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    /* Radio buttons */
+    .stRadio > div {
+        background-color: transparent;
+    }
+
+    .stRadio > div > label {
+        color: #e0e0e0 !important;
+    }
+
+    /* Markdown dividers */
+    hr {
+        border-color: #1e3a5f;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #0d1b2a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #3a86ff;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #4cc9f0;
+    }
+
+    /* Plotly chart containers */
+    .js-plotly-plot {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    /* Footer styling */
+    .footer-text {
+        text-align: center;
+        color: #4cc9f0;
+        padding: 20px;
+        background: linear-gradient(135deg, rgba(13, 27, 42, 0.8) 0%, rgba(27, 38, 59, 0.8) 100%);
+        border-radius: 10px;
+        border: 1px solid #1e3a5f;
+        margin-top: 20px;
+    }
     </style>
 """, unsafe_allow_html=True)
+
+# ============================================================================
+# COLOR PALETTE FOR VISUALIZATIONS
+# ============================================================================
+COLORS = {
+    'primary': '#3a86ff',  # Bright blue
+    'secondary': '#4cc9f0',  # Cyan
+    'accent': '#00d4aa',  # Teal/Green
+    'warning': '#ff6b6b',  # Coral red
+    'purple': '#8338ec',  # Purple
+    'orange': '#ff9f1c',  # Orange
+    'background': '#0d1b2a',  # Dark blue
+    'surface': '#1b263b',  # Surface blue
+    'border': '#1e3a5f',  # Border blue
+    'text': '#e0e0e0',  # Light text
+    'highlight': '#4cc9f0',  # Highlight cyan
+}
+
+# Custom color scales for charts
+BLUE_SCALE = ['#0d1b2a', '#1b263b', '#1e3a5f', '#3a86ff', '#4cc9f0', '#7dd3fc']
+PERFORMANCE_SCALE = ['#ff6b6b', '#ff9f1c', '#ffd93d', '#6bcb77', '#4cc9f0', '#3a86ff']
+GRADIENT_SCALE = ['#0d1b2a', '#1e3a5f', '#3a86ff', '#4cc9f0', '#00d4aa']
+
+# Plotly template for dark theme
+PLOTLY_TEMPLATE = {
+    'layout': {
+        'paper_bgcolor': 'rgba(13, 27, 42, 0.8)',
+        'plot_bgcolor': 'rgba(13, 27, 42, 0.8)',
+        'font': {'color': '#e0e0e0', 'family': 'Arial, sans-serif'},
+        'title': {'font': {'color': '#4cc9f0', 'size': 18}},
+        'xaxis': {
+            'gridcolor': '#1e3a5f',
+            'linecolor': '#1e3a5f',
+            'tickfont': {'color': '#e0e0e0'},
+            'title': {'font': {'color': '#4cc9f0'}}
+        },
+        'yaxis': {
+            'gridcolor': '#1e3a5f',
+            'linecolor': '#1e3a5f',
+            'tickfont': {'color': '#e0e0e0'},
+            'title': {'font': {'color': '#4cc9f0'}}
+        },
+        'legend': {
+            'bgcolor': 'rgba(27, 38, 59, 0.8)',
+            'bordercolor': '#1e3a5f',
+            'font': {'color': '#e0e0e0'}
+        },
+        'coloraxis': {'colorbar': {'tickfont': {'color': '#e0e0e0'}}}
+    }
+}
+
+
+def apply_dark_theme(fig):
+    """Apply dark theme to Plotly figure"""
+    fig.update_layout(
+        paper_bgcolor='rgba(13, 27, 42, 0.8)',
+        plot_bgcolor='rgba(13, 27, 42, 0.8)',
+        font=dict(color='#e0e0e0', family='Arial, sans-serif'),
+        title=dict(font=dict(color='#4cc9f0', size=18)),
+        xaxis=dict(
+            gridcolor='#1e3a5f',
+            linecolor='#1e3a5f',
+            tickfont=dict(color='#e0e0e0'),
+            title=dict(font=dict(color='#4cc9f0'))
+        ),
+        yaxis=dict(
+            gridcolor='#1e3a5f',
+            linecolor='#1e3a5f',
+            tickfont=dict(color='#e0e0e0'),
+            title=dict(font=dict(color='#4cc9f0'))
+        ),
+        legend=dict(
+            bgcolor='rgba(27, 38, 59, 0.8)',
+            bordercolor='#1e3a5f',
+            font=dict(color='#e0e0e0')
+        )
+    )
+    return fig
+
 
 # Clear cache if requested
 if st.session_state.get('clear_cache', False):
@@ -205,7 +551,7 @@ def aggregate_profitability(df: pd.DataFrame, group_col: str, min_hours_filter: 
 
 
 def show_global_kpis(df: pd.DataFrame, show_comparison=False):
-    """Enhanced KPI display with optional period comparison"""
+    """Enhanced KPI display with dark theme styling"""
     if df.empty:
         st.warning("⚠️ No records after applying filters.")
         return
@@ -227,7 +573,7 @@ def show_global_kpis(df: pd.DataFrame, show_comparison=False):
     else:
         avg_rate = 0
 
-    # Display KPIs
+    # Display KPIs with custom styling
     col1, col2, col3, col4, col5 = st.columns(5)
 
     col1.metric("💰 Total Revenue", f"${total_rev:,.0f}", help="Total revenue from all work in the current filter")
@@ -524,10 +870,11 @@ if view_mode == "Projects / Clients":
             hover_data={"Revenue": ":,.0f", "Billable_Hours": ":,.1f", "Profit": ":,.0f",
                         "Profit_Margin": ":.1%", "Profit_per_Hour": ":.2f", "ROI": ":.1f"},
             color="Category" if "Category" in agg.columns else None,
+            color_discrete_sequence=[COLORS['primary'], COLORS['secondary'], COLORS['accent'],
+                                     COLORS['purple'], COLORS['orange'], COLORS['warning']],
             labels={"Revenue_per_Hour": "Revenue per Hour ($/hr)", "Profit_Margin": "Profit Margin",
                     "Profit_per_Hour": "Profit per Hour ($/hr)", "Category": "Project Category"},
             title=f"{group_level}: Revenue per Hour vs {profit_metric_choice}",
-            template="plotly_white"
         )
 
         if y_col == "Profit_Margin":
@@ -537,9 +884,10 @@ if view_mode == "Projects / Clients":
 
         median_x = agg["Revenue_per_Hour"].median()
         median_y = agg[y_col].median()
-        fig_scatter.add_hline(y=median_y, line_dash="dash", line_color="gray", opacity=0.5)
-        fig_scatter.add_vline(x=median_x, line_dash="dash", line_color="gray", opacity=0.5)
+        fig_scatter.add_hline(y=median_y, line_dash="dash", line_color=COLORS['secondary'], opacity=0.5)
+        fig_scatter.add_vline(x=median_x, line_dash="dash", line_color=COLORS['secondary'], opacity=0.5)
         fig_scatter.update_layout(height=600, margin=dict(l=30, r=30, t=60, b=30))
+        fig_scatter = apply_dark_theme(fig_scatter)
         st.plotly_chart(fig_scatter, use_container_width=True)
 
         with st.expander("📖 Chart Interpretation Guide"):
@@ -555,16 +903,18 @@ if view_mode == "Projects / Clients":
         agg_sorted = agg.sort_values("Revenue", ascending=True).tail(20)
         fig_bar = px.bar(agg_sorted, y=group_level, x="Revenue", orientation='h', color="Profit_Margin",
                          hover_data=["Profit", "Billable_Hours"], title=f"Top 20 {group_level} by Revenue",
-                         template="plotly_white", color_continuous_scale="RdYlGn")
+                         color_continuous_scale=PERFORMANCE_SCALE)
         fig_bar.update_layout(height=700)
+        fig_bar = apply_dark_theme(fig_bar)
         st.plotly_chart(fig_bar, use_container_width=True)
 
     else:  # Treemap
         fig_tree = px.treemap(agg.head(30), path=[group_level], values="Revenue", color="Profit_Margin",
                               hover_data=["Profit", "Billable_Hours"],
                               title=f"{group_level} Revenue Distribution (Top 30)",
-                              color_continuous_scale="RdYlGn", template="plotly_white")
+                              color_continuous_scale=PERFORMANCE_SCALE)
         fig_tree.update_layout(height=600)
+        fig_tree = apply_dark_theme(fig_tree)
         st.plotly_chart(fig_tree, use_container_width=True)
 
     st.markdown("---")
@@ -578,8 +928,9 @@ if view_mode == "Projects / Clients":
     fig_rev = px.bar(agg_sorted_rev, x=group_level, y="Revenue_per_Hour",
                      hover_data={"Revenue": ":,.0f", "Billable_Hours": ":,.1f", "Profit_Margin": ":.1%"},
                      labels={"Revenue_per_Hour": "$/hr"}, title=f"Top {top_n} by Revenue/Hour",
-                     template="plotly_white", color="Revenue_per_Hour", color_continuous_scale="Blues")
+                     color="Revenue_per_Hour", color_continuous_scale=BLUE_SCALE)
     fig_rev.update_layout(xaxis_tickangle=-45, showlegend=False)
+    fig_rev = apply_dark_theme(fig_rev)
     col_a.plotly_chart(fig_rev, use_container_width=True)
 
     # Top by Profit
@@ -587,8 +938,9 @@ if view_mode == "Projects / Clients":
     fig_prof = px.bar(agg_sorted_prof, x=group_level, y="Profit_per_Hour",
                       hover_data={"Revenue": ":,.0f", "Billable_Hours": ":,.1f", "Profit_Margin": ":.1%"},
                       labels={"Profit_per_Hour": "$/hr"}, title=f"Top {top_n} by Profit/Hour",
-                      template="plotly_white", color="Profit_per_Hour", color_continuous_scale="Greens")
+                      color="Profit_per_Hour", color_continuous_scale=GRADIENT_SCALE)
     fig_prof.update_layout(xaxis_tickangle=-45, showlegend=False)
+    fig_prof = apply_dark_theme(fig_prof)
     col_b.plotly_chart(fig_prof, use_container_width=True)
 
     # Top by Margin
@@ -596,9 +948,10 @@ if view_mode == "Projects / Clients":
     fig_margin = px.bar(agg_sorted_margin, x=group_level, y="Profit_Margin",
                         hover_data={"Revenue": ":,.0f", "Profit": ":,.0f", "Billable_Hours": ":,.1f"},
                         labels={"Profit_Margin": "Margin"}, title=f"Top {top_n} by Profit Margin",
-                        template="plotly_white", color="Profit_Margin", color_continuous_scale="RdYlGn")
+                        color="Profit_Margin", color_continuous_scale=PERFORMANCE_SCALE)
     fig_margin.update_yaxes(tickformat=".1%")
     fig_margin.update_layout(xaxis_tickangle=-45, showlegend=False)
+    fig_margin = apply_dark_theme(fig_margin)
     col_c.plotly_chart(fig_margin, use_container_width=True)
 
     st.markdown("---")
@@ -629,12 +982,14 @@ if view_mode == "Projects / Clients":
 
             fig_trend = go.Figure()
             fig_trend.add_trace(go.Scatter(x=monthly["YearMonth"], y=monthly["Revenue"], name="Revenue",
-                                           line=dict(color='#636EFA', width=2)))
+                                           line=dict(color=COLORS['primary'], width=3),
+                                           fill='tozeroy', fillcolor=f'rgba(58, 134, 255, 0.2)'))
             fig_trend.add_trace(go.Scatter(x=monthly["YearMonth"], y=monthly["Profit"], name="Profit",
-                                           line=dict(color='#00CC96', width=2)))
+                                           line=dict(color=COLORS['accent'], width=3),
+                                           fill='tozeroy', fillcolor=f'rgba(0, 212, 170, 0.2)'))
             fig_trend.update_layout(title=f"Monthly Trend for {selected_group}", xaxis_title="Month",
-                                    yaxis_title="Amount ($)",
-                                    template="plotly_white", height=300)
+                                    yaxis_title="Amount ($)", height=300)
+            fig_trend = apply_dark_theme(fig_trend)
             st.plotly_chart(fig_trend, use_container_width=True)
 
         st.markdown("##### 📊 Individual Entries")
@@ -708,12 +1063,13 @@ elif view_mode == "Consultants":
         agg_cons, x="Revenue_per_Hour", y="Profit_per_Hour", size="Billable_Hours", hover_name=group_col,
         hover_data={"Revenue": ":,.0f", "Billable_Hours": ":,.1f", "Profit": ":,.0f", "Profit_Margin": ":.1%",
                     "Utilization": ":.1f", "Avg_Billing_Rate": ":.2f"},
-        color="Utilization", color_continuous_scale="Viridis",
+        color="Utilization", color_continuous_scale=GRADIENT_SCALE,
         labels={"Revenue_per_Hour": "Revenue per Hour ($/hr)", "Profit_per_Hour": "Profit per Hour ($/hr)",
                 "Utilization": "Utilization (%)"},
-        title="Consultant Performance: Revenue vs Profit per Hour", template="plotly_white"
+        title="Consultant Performance: Revenue vs Profit per Hour",
     )
     fig_scatter_cons.update_layout(height=600, margin=dict(l=30, r=30, t=60, b=30))
+    fig_scatter_cons = apply_dark_theme(fig_scatter_cons)
     st.plotly_chart(fig_scatter_cons, use_container_width=True)
 
     # Not Billable Revenue Detail
@@ -736,8 +1092,9 @@ elif view_mode == "Consultants":
                                 orientation="h",
                                 title="Revenue by Billing Code (Not Billable)",
                                 labels={"Revenue": "Revenue ($)", "Billing Code Name": "Billing Code"},
-                                template="plotly_white")
+                                color="Revenue", color_continuous_scale=BLUE_SCALE)
                 fig_nb.update_layout(height=500, margin=dict(l=40, r=20, t=60, b=40))
+                fig_nb = apply_dark_theme(fig_nb)
                 st.plotly_chart(fig_nb, use_container_width=True)
             else:
                 st.warning("Column 'Billing Code Name' not found in the dataset.")
@@ -751,25 +1108,28 @@ elif view_mode == "Consultants":
     # Top by Revenue/Hour
     top_rev_cons = agg_cons.sort_values("Revenue_per_Hour", ascending=False).head(top_n_cons)
     fig_cons_rev = px.bar(top_rev_cons, x=group_col, y="Revenue_per_Hour", title="By Revenue per Hour",
-                          labels={"Revenue_per_Hour": "$/hr"}, template="plotly_white",
-                          color="Revenue_per_Hour", color_continuous_scale="Blues")
+                          labels={"Revenue_per_Hour": "$/hr"},
+                          color="Revenue_per_Hour", color_continuous_scale=BLUE_SCALE)
     fig_cons_rev.update_layout(xaxis_tickangle=-45, showlegend=False)
+    fig_cons_rev = apply_dark_theme(fig_cons_rev)
     col1.plotly_chart(fig_cons_rev, use_container_width=True)
 
     # Top by Profit/Hour
     top_prof_cons = agg_cons.sort_values("Profit_per_Hour", ascending=False).head(top_n_cons)
     fig_cons_prof = px.bar(top_prof_cons, x=group_col, y="Profit_per_Hour", title="By Profit per Hour",
-                           labels={"Profit_per_Hour": "$/hr"}, template="plotly_white",
-                           color="Profit_per_Hour", color_continuous_scale="Greens")
+                           labels={"Profit_per_Hour": "$/hr"},
+                           color="Profit_per_Hour", color_continuous_scale=GRADIENT_SCALE)
     fig_cons_prof.update_layout(xaxis_tickangle=-45, showlegend=False)
+    fig_cons_prof = apply_dark_theme(fig_cons_prof)
     col2.plotly_chart(fig_cons_prof, use_container_width=True)
 
     # Top by Utilization
     top_util_cons = agg_cons.sort_values("Utilization", ascending=False).head(top_n_cons)
     fig_cons_util = px.bar(top_util_cons, x=group_col, y="Utilization", title="By Utilization",
-                           labels={"Utilization": "%"}, template="plotly_white",
-                           color="Utilization", color_continuous_scale="Oranges")
+                           labels={"Utilization": "%"},
+                           color="Utilization", color_continuous_scale=['#0d1b2a', '#ff9f1c', '#ff6b6b'])
     fig_cons_util.update_layout(xaxis_tickangle=-45, showlegend=False)
+    fig_cons_util = apply_dark_theme(fig_cons_util)
     col3.plotly_chart(fig_cons_util, use_container_width=True)
 
     # Performance distribution
@@ -779,12 +1139,16 @@ elif view_mode == "Consultants":
     col1, col2 = st.columns(2)
     with col1:
         fig_hist_rate = px.histogram(agg_cons, x="Revenue_per_Hour", nbins=20, title="Revenue per Hour Distribution",
-                                     labels={"Revenue_per_Hour": "Revenue/Hour ($)"}, template="plotly_white")
+                                     labels={"Revenue_per_Hour": "Revenue/Hour ($)"},
+                                     color_discrete_sequence=[COLORS['primary']])
+        fig_hist_rate = apply_dark_theme(fig_hist_rate)
         st.plotly_chart(fig_hist_rate, use_container_width=True)
 
     with col2:
         fig_hist_util = px.histogram(agg_cons, x="Utilization", nbins=20, title="Utilization Distribution",
-                                     labels={"Utilization": "Utilization (%)"}, template="plotly_white")
+                                     labels={"Utilization": "Utilization (%)"},
+                                     color_discrete_sequence=[COLORS['secondary']])
+        fig_hist_util = apply_dark_theme(fig_hist_util)
         st.plotly_chart(fig_hist_util, use_container_width=True)
 
     # Detailed Performance Table
@@ -802,7 +1166,7 @@ elif view_mode == "Consultants":
             "Revenue": "${:,.0f}", "Cost": "${:,.0f}", "Profit": "${:,.0f}", "Profit_Margin": "{:.1%}",
             "Billable_Hours": "{:.1f}", "Revenue_per_Hour": "${:.2f}", "Profit_per_Hour": "${:.2f}",
             "Utilization": "{:.1f}%", "Avg_Billing_Rate": "${:.2f}", "ROI": "{:.1f}%"
-        }).background_gradient(subset=["Profit_Margin"], cmap="RdYlGn"),
+        }).background_gradient(subset=["Profit_Margin"], cmap="Blues"),
         use_container_width=True, height=400
     )
 
@@ -867,26 +1231,32 @@ elif view_mode == "Time Series":
     if breakdown == "Overall":
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=ts_agg[time_col], y=ts_agg["Revenue"], name="Revenue",
-                                 line=dict(color='#636EFA', width=3), mode='lines+markers'))
+                                 line=dict(color=COLORS['primary'], width=3), mode='lines+markers',
+                                 fill='tozeroy', fillcolor='rgba(58, 134, 255, 0.15)'))
         fig.add_trace(go.Scatter(x=ts_agg[time_col], y=ts_agg["Profit"], name="Profit",
-                                 line=dict(color='#00CC96', width=3), mode='lines+markers'))
+                                 line=dict(color=COLORS['accent'], width=3), mode='lines+markers',
+                                 fill='tozeroy', fillcolor='rgba(0, 212, 170, 0.15)'))
         fig.add_trace(go.Scatter(x=ts_agg[time_col], y=ts_agg["Cost"], name="Cost",
-                                 line=dict(color='#EF553B', width=3, dash='dash'), mode='lines+markers'))
+                                 line=dict(color=COLORS['warning'], width=3, dash='dash'), mode='lines+markers'))
         fig.update_layout(title=f"{time_grain} Revenue, Profit & Cost Trend", xaxis_title="Period",
-                          yaxis_title="Amount ($)",
-                          template="plotly_white", height=500, hovermode='x unified')
+                          yaxis_title="Amount ($)", height=500, hovermode='x unified')
+        fig = apply_dark_theme(fig)
         st.plotly_chart(fig, use_container_width=True)
 
         col1, col2 = st.columns(2)
         with col1:
             fig_hours = px.bar(ts_agg, x=time_col, y="Billable_Hours", title=f"{time_grain} Billed Hours",
-                               labels={"Billable_Hours": "Hours"}, template="plotly_white")
+                               labels={"Billable_Hours": "Hours"},
+                               color_discrete_sequence=[COLORS['secondary']])
+            fig_hours = apply_dark_theme(fig_hours)
             st.plotly_chart(fig_hours, use_container_width=True)
 
         with col2:
             fig_margin = px.line(ts_agg, x=time_col, y="Profit_Margin", title=f"{time_grain} Profit Margin",
-                                 labels={"Profit_Margin": "Margin"}, template="plotly_white")
+                                 labels={"Profit_Margin": "Margin"},
+                                 color_discrete_sequence=[COLORS['accent']])
             fig_margin.update_yaxes(tickformat=".1%")
+            fig_margin = apply_dark_theme(fig_margin)
             st.plotly_chart(fig_margin, use_container_width=True)
 
         if len(ts_agg) > 1:
@@ -919,20 +1289,29 @@ elif view_mode == "Time Series":
 
             fig_rev = px.line(ts_sel, x=time_col, y="Revenue", color=breakdown,
                               title=f"{time_grain} Revenue Comparison",
-                              labels={"Revenue": "Revenue ($)"}, template="plotly_white")
+                              labels={"Revenue": "Revenue ($)"},
+                              color_discrete_sequence=[COLORS['primary'], COLORS['secondary'], COLORS['accent'],
+                                                       COLORS['purple'], COLORS['orange']])
+            fig_rev = apply_dark_theme(fig_rev)
             st.plotly_chart(fig_rev, use_container_width=True)
 
             col1, col2 = st.columns(2)
             with col1:
                 fig_profit = px.line(ts_sel, x=time_col, y="Profit", color=breakdown,
                                      title=f"{time_grain} Profit Comparison",
-                                     labels={"Profit": "Profit ($)"}, template="plotly_white")
+                                     labels={"Profit": "Profit ($)"},
+                                     color_discrete_sequence=[COLORS['primary'], COLORS['secondary'], COLORS['accent'],
+                                                              COLORS['purple'], COLORS['orange']])
+                fig_profit = apply_dark_theme(fig_profit)
                 st.plotly_chart(fig_profit, use_container_width=True)
 
             with col2:
                 fig_hours = px.line(ts_sel, x=time_col, y="Billable_Hours", color=breakdown,
                                     title=f"{time_grain} Hours Comparison",
-                                    labels={"Billable_Hours": "Hours"}, template="plotly_white")
+                                    labels={"Billable_Hours": "Hours"},
+                                    color_discrete_sequence=[COLORS['primary'], COLORS['secondary'], COLORS['accent'],
+                                                             COLORS['purple'], COLORS['orange']])
+                fig_hours = apply_dark_theme(fig_hours)
                 st.plotly_chart(fig_hours, use_container_width=True)
 
     st.markdown("---")
@@ -988,8 +1367,9 @@ elif view_mode == "Executive Summary":
             client_agg = aggregate_profitability(df_filtered, "Client Name", 0).head(10)
             if not client_agg.empty:
                 fig = px.bar(client_agg, y="Client Name", x="Revenue", orientation='h', color="Profit_Margin",
-                             title="Top 10 Clients by Revenue", template="plotly_white",
-                             color_continuous_scale="RdYlGn")
+                             title="Top 10 Clients by Revenue",
+                             color_continuous_scale=PERFORMANCE_SCALE)
+                fig = apply_dark_theme(fig)
                 st.plotly_chart(fig, use_container_width=True)
             else:
                 st.info("No client data available")
@@ -999,8 +1379,9 @@ elif view_mode == "Executive Summary":
             project_agg = aggregate_profitability(df_filtered, "Project Name", 0).head(10)
             if not project_agg.empty:
                 fig = px.bar(project_agg, y="Project Name", x="Revenue", orientation='h', color="Profit_Margin",
-                             title="Top 10 Projects by Revenue", template="plotly_white",
-                             color_continuous_scale="RdYlGn")
+                             title="Top 10 Projects by Revenue",
+                             color_continuous_scale=PERFORMANCE_SCALE)
+                fig = apply_dark_theme(fig)
                 st.plotly_chart(fig, use_container_width=True)
             else:
                 st.info("No project data available")
@@ -1010,8 +1391,9 @@ elif view_mode == "Executive Summary":
             consultant_agg = aggregate_profitability(df_filtered, "Resource Name", 0).head(10)
             if not consultant_agg.empty:
                 fig = px.bar(consultant_agg, y="Resource Name", x="Revenue", orientation='h', color="Profit_Margin",
-                             title="Top 10 Consultants by Revenue", template="plotly_white",
-                             color_continuous_scale="RdYlGn")
+                             title="Top 10 Consultants by Revenue",
+                             color_continuous_scale=PERFORMANCE_SCALE)
+                fig = apply_dark_theme(fig)
                 st.plotly_chart(fig, use_container_width=True)
             else:
                 st.info("No consultant data available")
@@ -1025,12 +1407,15 @@ elif view_mode == "Executive Summary":
         monthly["Profit"] = monthly["Revenue"] - monthly["Cost"]
 
         fig = go.Figure()
-        fig.add_trace(go.Bar(x=monthly["YearMonth"], y=monthly["Revenue"], name="Revenue", marker_color='#636EFA'))
-        fig.add_trace(go.Bar(x=monthly["YearMonth"], y=monthly["Cost"], name="Cost", marker_color='#EF553B'))
+        fig.add_trace(go.Bar(x=monthly["YearMonth"], y=monthly["Revenue"], name="Revenue",
+                             marker_color=COLORS['primary']))
+        fig.add_trace(go.Bar(x=monthly["YearMonth"], y=monthly["Cost"], name="Cost",
+                             marker_color=COLORS['warning']))
         fig.add_trace(go.Scatter(x=monthly["YearMonth"], y=monthly["Profit"], name="Profit",
-                                 mode='lines+markers', line=dict(color='#00CC96', width=3)))
+                                 mode='lines+markers', line=dict(color=COLORS['accent'], width=3)))
         fig.update_layout(title="Last 12 Months Performance", xaxis_title="Month", yaxis_title="Amount ($)",
-                          template="plotly_white", height=400, barmode='group')
+                          height=400, barmode='group')
+        fig = apply_dark_theme(fig)
         st.plotly_chart(fig, use_container_width=True)
 
 # ============================================================================
@@ -1039,9 +1424,13 @@ elif view_mode == "Executive Summary":
 st.markdown("---")
 st.markdown(
     f"""
-    <div style='text-align: center; color: gray; padding: 20px;'>
-        <p>Steeves & Associates Revenue & Profitability Dashboard v2.0</p>
-        <p style='font-size: 0.8em;'>Last updated: {datetime.now().strftime("%Y-%m-%d %H:%M")}</p>
+    <div class='footer-text'>
+        <p style='color: #4cc9f0; font-size: 1.1em; margin-bottom: 5px;'>
+            ✨ Steeves & Associates Revenue & Profitability Dashboard v2.0
+        </p>
+        <p style='font-size: 0.85em; color: #8892b0;'>
+            Last updated: {datetime.now().strftime("%Y-%m-%d %H:%M")} | Powered by Streamlit
+        </p>
     </div>
     """,
     unsafe_allow_html=True
