@@ -1426,7 +1426,7 @@ st.markdown(
     f"""
     <div class='footer-text'>
         <p style='color: #4cc9f0; font-size: 1.1em; margin-bottom: 5px;'>
-            ✨ Steeves & Associates Revenue & Profitability Dashboard v2.0
+            ✨ Steeves & Associates Revenue & Profitability Dashboard v2.0 - Authored by Princess Ramboyong
         </p>
         <p style='font-size: 0.85em; color: #8892b0;'>
             Last updated: {datetime.now().strftime("%Y-%m-%d %H:%M")} | Powered by Streamlit
